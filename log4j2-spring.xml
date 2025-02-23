@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="LOG_PATH" value="log"/>
+        <Property name="LOG_FILE" value="template-api"/>
+
+        <Property name="LOG_MAX_SIZE" value="10MB"/>
+        <Property name="LOG_MAX_DAYS" value="1"/>
+
+        <Property name="LOG_SERVER" value="INFO"/>
+        <Property name="LOG_APPLICATION" value="DEBUG"/>
+        <Property name="LOG_CACHE" value="WARN"/>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false">
+                <pattern>%highlight{%d{ISO8601} [%X{traceId}-%X{spanId}] %-5level %logger{1.}: %msg
+                    %throwable{10}%n}{INFO=normal}
+                </pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="RollingFile"
+                     fileName="./${LOG_PATH}/${LOG_FILE}.log"
+                     filePattern="./${LOG_PATH}/${date:yyyy-MM}/${LOG_FILE}-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d{ISO8601} [%X{traceId}-%X{spanId}] %-5level %logger{1.} %m%xThrowable%n</pattern>
+            </PatternLayout>
+
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_SIZE}"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.it" level="${LOG_APPLICATION}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="io.lettuce.core" level="${LOG_CACHE}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <Logger name="org.springframework.jdbc.core.JdbcTemplate" level="${LOG_SERVER}" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="${LOG_SERVER}">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
