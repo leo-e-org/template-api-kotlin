@@ -1,0 +1,28 @@
+version: 2
+
+# registries:
+#   maven-packages:
+#     type: maven-repository
+#     url: https://maven.pkg.github.com/IT/packages
+#     username: ${{ secrets.DEPENDABOT_USER }}
+#     password: ${{ secrets.DEPENDABOT_TOKEN }}
+#     replaces-base: false
+
+updates:
+  - package-ecosystem: gradle
+    directory: /
+#     registries:
+#       - maven-packages
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "[Dependabot]"
+      include: scope
+    open-pull-requests-limit: 10
+    target-branch: develop
+    ignore:
+      - dependency-name: "com.microsoft.sqlserver:*"
+      - dependency-name: "de.codecentric:*"
+      - dependency-name: "org.springframework:*"
+      - dependency-name: "org.springframework.boot"
+      - dependency-name: "org.springframework.boot:*"

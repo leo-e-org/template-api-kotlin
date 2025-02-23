@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: template-api
+  name: template-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: template-api
+  strategy: { }
+  template:
+    metadata:
+      labels:
+        app: template-api
+    spec:
+      containers:
+        - image: ${docker_registry}/it/template-api
+          name: template-api
+          imagePullPolicy: Always
+          resources: { }
+          env:
+            - name: database_password
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: database_password
+            - name: redis_host
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: redis_host
+            - name: redis_password
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: redis_password
+            - name: api_forgerock_url
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: api_forgerock_url
+            - name: api_userinfohost_url
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: api_userinfohost_url
+            - name: api_userservice_url
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: api_userservice_url
+            - name: app_client_id
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: app_client_id
+            - name: app_client_secret
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: app_client_secret
+            - name: app_token_duration
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: app_token_duration
+          readinessProbe:
+            httpGet:
+              path: /template-api/actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+            successThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /template-api/actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+          volumeMounts:
+            - mountPath: /log
+              name: log-volume
+      volumes:
+        - name: log-volume
+          hostPath:
+            path: /var/log/deployments/template-api
+      tolerations:
+        - key: "node.kubernetes.io/memory-pressure"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 0
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/path: /template-api/actuator/prometheus
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+  labels:
+    app: template-api
+  name: template-api
+  namespace: default
+spec:
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: template-api
+  type: NodePort
+status:
+  loadBalancer: { }

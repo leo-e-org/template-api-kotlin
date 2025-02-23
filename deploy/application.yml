@@ -1,0 +1,112 @@
+logging:
+  config: "log4j2-spring.xml"
+
+server:
+  port: 8080
+
+management:
+  endpoint:
+    health:
+      show-components: "always"
+      show-details: "always"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+springdoc:
+  swagger-ui:
+    enabled: false
+
+spring:
+  application:
+    name: "template-api"
+
+  # boot:
+  #   admin:
+  #     client:
+  #       url: http://localhost/springboot_admin
+  #       instance:
+  #         name: "Template API"
+  #         health-url: http://localhost/template-api/actuator/health
+  #         service-url: http://localhost/template-api
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 10800000 # 180 minutes
+
+  data:
+    redis:
+      connect-timeout: 5000
+      host: ${redis_host}
+      password: ${redis_password}
+      port: 6379
+
+  # datasource:
+  #   driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  #   url: jdbc:sqlserver://server;databaseName=databaseName;encrypt=false;
+  #   username: ${database_username}
+  #   password: ${database_password}
+  #   hikari:
+  #     connection-test-query: SELECT 1
+  #     connection-timeout: 30000
+  #     idle-timeout: 600000
+  #     max-lifetime: 1800000
+  #     maximum-pool-size: 100
+  #     minimum-idle: 1000
+
+  # jpa:
+  #   hibernate:
+  #     naming:
+  #       implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+  #       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  #   properties:
+  #     hibernate:
+  #       format_sql: false
+  #       generate_statistics: false
+  #       jdbc:
+  #         batch_size: 1000
+  #       order_inserts: true
+  #       order_updates: true
+  #   show-sql: false
+
+  jackson:
+    default-property-inclusion: non_null
+    deserialization:
+      ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT: true
+      ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_PROPERTIES: true
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      INDENT_OUTPUT: false
+      WRITE_DATES_AS_TIMESTAMPS: false
+      WRITE_DATES_WITH_ZONE_ID: true
+
+  webflux:
+    base-path: "/template-api"
+
+app:
+  api:
+    legacy:
+      url: "http://localhost:8080/template-api"
+    request-timeout: 60
+
+  config:
+    cache:
+      custom-key-ttl: 3600
+
+    security:
+      cors:
+        enabled: true
+        origins: https://localhost
+        methods: OPTIONS,GET,POST,PUT,PATCH,DELETE
+        headers: Authorization,Accept,Cache-Control,Connection,Content-Type,Expires,Origin,Pragma,Referer,Accept-Language,Access-Control-Allow-Origin
+
+    webclient:
+      max-memory-size: 20

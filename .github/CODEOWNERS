@@ -1,0 +1,8 @@
+# Default owners for everything in the repository
+*          @IT/devs
+
+# Dot-files should be handled by admins only
+.*         @IT/admins
+
+# Code owners must be handled by admins only
+CODEOWNERS @IT/admins

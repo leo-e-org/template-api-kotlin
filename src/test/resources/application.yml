@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    defer-datasource-initialization: true
+
+app:
+  api:
+    legacy:
+      url: "http://localhost:8080/template-api"
