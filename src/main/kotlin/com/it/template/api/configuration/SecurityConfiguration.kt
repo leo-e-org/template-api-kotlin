@@ -26,56 +26,48 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource
 @Configuration
 @EnableMethodSecurity
 @EnableWebFluxSecurity
-class SecurityConfiguration(
+open class SecurityConfiguration(
     private val apiPermissionEvaluator: ApiPermissionEvaluator,
     private val securityAuthenticationConverter: SecurityAuthenticationConverter,
     private val securityAuthenticationManager: SecurityAuthenticationManager,
 
     @Value("\${app.config.security.cors.enabled:false}")
     private val enableCors: Boolean,
-
     @Value("\${app.config.security.cors.origins:}")
     private val allowedOrigins: List<String>,
-
     @Value("\${app.config.security.cors.methods:}")
     private val allowedMethods: List<String>,
-
     @Value("\${app.config.security.cors.headers:}")
     private val allowedHeaders: List<String>
 ) {
 
     @Bean
-    fun springWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
+    open fun springWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         val filter = AuthenticationWebFilter(securityAuthenticationManager)
         filter.setServerAuthenticationConverter(securityAuthenticationConverter)
 
         return http
             .cors { if (enableCors) it.configurationSource(corsConfigurationSource()) else it.disable() }
-            .csrf { it.disable() }
             .logout { it.disable() }
             .formLogin { it.disable() }
             .httpBasic { it.disable() }
             .headers { it.frameOptions { it.disable() } }
-
             .exceptionHandling {
                 it.authenticationEntryPoint(NotAuthenticatedEntryPoint()).accessDeniedHandler(AccessDeniedHandler())
             }
-
             .authenticationManager(securityAuthenticationManager)
             .addFilterAt(filter, SecurityWebFiltersOrder.AUTHENTICATION)
-
             .securityMatcher(
                 NegatedServerWebExchangeMatcher(
                     ServerWebExchangeMatchers.pathMatchers(*getAllowedEndpoints().toTypedArray())
                 )
             )
             .authorizeExchange { it.pathMatchers(HttpMethod.OPTIONS).permitAll().anyExchange().authenticated() }
-
             .build()
     }
 
     @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
+    open fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
         configuration.applyPermitDefaultValues()
         allowedOrigins.forEach { configuration.addAllowedOrigin(it) }
@@ -88,7 +80,7 @@ class SecurityConfiguration(
     }
 
     @Bean
-    fun methodSecurityExpressionHandler(): MethodSecurityExpressionHandler {
+    open fun methodSecurityExpressionHandler(): MethodSecurityExpressionHandler {
         val expressionHandler = DefaultMethodSecurityExpressionHandler()
         expressionHandler.setPermissionEvaluator(apiPermissionEvaluator)
         return expressionHandler

@@ -17,10 +17,9 @@ import reactor.core.publisher.Mono
 
 @Primary
 @Configuration
-class WebClientConfiguration(
+open class WebClientConfiguration(
     @Value("\${app.api.legacy.url:}")
     private var apiLegacyUrl: String,
-
     @Value("\${app.config.webclient.max-memory-size:20}")
     private var maxMemorySize: Int
 ) {
@@ -31,7 +30,7 @@ class WebClientConfiguration(
     }
 
     @Bean
-    fun apiLegacyWebClient(connector: ReactorClientHttpConnector): WebClient {
+    open fun apiLegacyWebClient(connector: ReactorClientHttpConnector): WebClient {
         return buildWebClient(apiLegacyUrl, connector)
     }
 

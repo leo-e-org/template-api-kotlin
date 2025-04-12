@@ -8,10 +8,10 @@ import org.springframework.data.redis.serializer.RedisSerializationContext
 import org.springframework.data.redis.serializer.StringRedisSerializer
 
 @Configuration
-class LettuceConfiguration {
+open class LettuceConfiguration {
 
     @Bean
-    fun reactiveRedisTemplate(factory: ReactiveRedisConnectionFactory): ReactiveRedisTemplate<String, String> {
+    open fun reactiveRedisTemplate(factory: ReactiveRedisConnectionFactory): ReactiveRedisTemplate<String, String> {
         val stringSerializer = StringRedisSerializer()
         return ReactiveRedisTemplate(
             factory, RedisSerializationContext.newSerializationContext<String, String>()

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.web.WebProperties
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler
 import org.springframework.boot.web.reactive.error.ErrorAttributes
 import org.springframework.context.ApplicationContext
+import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -20,7 +21,7 @@ import org.springframework.web.server.ResponseStatusException
 import reactor.core.publisher.Mono
 
 @Component
-@Order(-2)
+@Order(Ordered.HIGHEST_PRECEDENCE)
 class WebExceptionHandler(
     errorAttributes: ErrorAttributes,
     applicationContext: ApplicationContext,

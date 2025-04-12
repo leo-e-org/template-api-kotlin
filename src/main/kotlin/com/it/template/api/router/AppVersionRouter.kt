@@ -10,12 +10,12 @@ import org.springframework.web.reactive.function.server.RouterFunctions
 import org.springframework.web.reactive.function.server.ServerResponse
 
 @Configuration
-class AppVersionRouter(
+open class AppVersionRouter(
     private val apiHandlerFilter: ApiHandlerFilter
 ) {
 
     @Bean
-    fun routeVersionInfo(handler: AppVersionHandler): RouterFunction<ServerResponse> {
+    open fun routeVersionInfo(handler: AppVersionHandler): RouterFunction<ServerResponse> {
         return RouterFunctions.route(GET("/AppVersion"), handler::handleRouteVersionInfo).filter(apiHandlerFilter)
     }
 }

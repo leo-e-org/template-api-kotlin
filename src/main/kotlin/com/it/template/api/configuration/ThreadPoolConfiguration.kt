@@ -6,14 +6,14 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class ThreadPoolConfiguration {
+open class ThreadPoolConfiguration {
 
     companion object {
         private const val FACTORY_THREAD_NUMBER = 10
     }
 
     @Bean
-    fun nioEventLoopGroup(): NioEventLoopGroup {
+    open fun nioEventLoopGroup(): NioEventLoopGroup {
         val factory = BasicThreadFactory.Builder()
             .namingPattern("ApiWebClientThread-%d")
             .daemon(true)

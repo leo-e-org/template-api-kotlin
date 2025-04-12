@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan
 @EnableCaching
 @ComponentScan(basePackages = ["com.it"])
 @SpringBootApplication
-class TemplateApplication
+open class TemplateApplication
 
 fun main(args: Array<String>) {
     runApplication<TemplateApplication>(*args)

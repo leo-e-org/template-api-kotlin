@@ -14,7 +14,7 @@ import reactor.netty.resources.ConnectionProvider
 import java.time.Duration
 
 @Configuration
-class NettyConfiguration(
+open class NettyConfiguration(
     @Value("\${app.api.request-timeout:30}")
     private var responseTimeout: Long
 ) {
@@ -33,7 +33,7 @@ class NettyConfiguration(
     }
 
     @Bean
-    fun nettyReactiveWebServerFactory(): NettyReactiveWebServerFactory {
+    open fun nettyReactiveWebServerFactory(): NettyReactiveWebServerFactory {
         return NettyReactiveWebServerFactory().apply {
             addServerCustomizers({ server ->
                 server.childOption(ChannelOption.SO_KEEPALIVE, true)
@@ -47,7 +47,7 @@ class NettyConfiguration(
     }
 
     @Bean
-    fun reactorResourceFactory(nioEventLoopGroup: NioEventLoopGroup): ReactorResourceFactory {
+    open fun reactorResourceFactory(nioEventLoopGroup: NioEventLoopGroup): ReactorResourceFactory {
         return ReactorResourceFactory().apply {
             connectionProvider = ConnectionProvider.builder("fixed")
                 .maxConnections(PROVIDER_MAX_CONNECTIONS)
@@ -59,7 +59,7 @@ class NettyConfiguration(
     }
 
     @Bean
-    fun reactorClientHttpConnector(reactorResourceFactory: ReactorResourceFactory): ReactorClientHttpConnector {
+    open fun reactorClientHttpConnector(reactorResourceFactory: ReactorResourceFactory): ReactorClientHttpConnector {
         return ReactorClientHttpConnector(reactorResourceFactory) { m ->
             m.followRedirect(true)
                 .responseTimeout(Duration.ofSeconds(responseTimeout))

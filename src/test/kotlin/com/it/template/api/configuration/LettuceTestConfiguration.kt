@@ -16,7 +16,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import java.time.Duration
 
 @TestConfiguration
-class LettuceTestConfiguration {
+open class LettuceTestConfiguration {
 
     companion object {
         private const val HOST = "localhost"
@@ -26,7 +26,7 @@ class LettuceTestConfiguration {
     }
 
     @Bean
-    fun redisTestTemplate(): RedisTemplate<String, String> {
+    open fun redisTestTemplate(): RedisTemplate<String, String> {
         val serializer = GenericJackson2JsonRedisSerializer(ObjectMapper())
         val template = RedisTemplate<String, String>()
         template.connectionFactory = createConnectionFactory()
