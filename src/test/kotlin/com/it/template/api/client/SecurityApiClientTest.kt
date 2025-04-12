@@ -1,6 +1,7 @@
 package com.it.template.api.client
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -14,6 +15,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @SpringBootTest
 @EnableAutoConfiguration(exclude = [DataSourceAutoConfiguration::class, HibernateJpaAutoConfiguration::class])
 @AutoConfigureWebTestClient
+@Disabled("Client cannot call itself")
 class SecurityApiClientTest {
 
     @Value("\${app.api.legacy.url:}")

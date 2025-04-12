@@ -1,0 +1,9 @@
+name: Test workflow
+
+on: [ pull_request ]
+
+jobs:
+  gradle:
+    name: Gradle
+    uses: leo-ely/github-workflows/.github/workflows/test-gradle.yml@main
+    secrets: inherit
