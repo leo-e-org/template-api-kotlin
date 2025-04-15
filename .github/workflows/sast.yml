@@ -9,7 +9,7 @@ on:
 jobs:
   codeql:
     name: CodeQL
-    uses: leo-ely/github-workflows/.github/workflows/codeql-scan.yml@main
+    uses: leo-ely/github-workflows/.github/workflows/codeql-gradle.yml@main
     permissions:
       actions: read
       contents: read
