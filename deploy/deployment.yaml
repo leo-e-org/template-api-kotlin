@@ -22,6 +22,11 @@ spec:
           imagePullPolicy: Always
           resources: { }
           env:
+            - name: database_username
+              valueFrom:
+                secretKeyRef:
+                  name: template-api-secrets
+                  key: database_username
             - name: database_password
               valueFrom:
                 secretKeyRef:
@@ -37,36 +42,6 @@ spec:
                 secretKeyRef:
                   name: template-api-secrets
                   key: redis_password
-            - name: api_forgerock_url
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: api_forgerock_url
-            - name: api_userinfohost_url
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: api_userinfohost_url
-            - name: api_userservice_url
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: api_userservice_url
-            - name: app_client_id
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: app_client_id
-            - name: app_client_secret
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: app_client_secret
-            - name: app_token_duration
-              valueFrom:
-                secretKeyRef:
-                  name: template-api-secrets
-                  key: app_token_duration
           readinessProbe:
             httpGet:
               path: /template-api/actuator/health
