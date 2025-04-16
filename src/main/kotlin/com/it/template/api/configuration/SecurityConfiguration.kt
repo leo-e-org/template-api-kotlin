@@ -87,6 +87,14 @@ open class SecurityConfiguration(
     }
 
     protected fun getAllowedEndpoints(): List<String> {
-        return listOf("/actuator/**", "/configuration/**", "/configuration/ui", "/v3/api-docs/**", "/webjars/**", "/**")
+        return listOf(
+            "/actuator/**",
+            "/configuration/**",
+            "/configuration/ui",
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/webjars/**",
+            "/**"
+        )
     }
 }

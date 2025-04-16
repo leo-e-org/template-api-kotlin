@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.20"
     kotlin("plugin.spring") version "2.1.20"
-    id("org.springframework.boot") version "3.4.3"
+    id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -34,8 +34,8 @@ configurations {
 
 val log4j2Version by extra("2.24.3")
 val snakeyamlVersion by extra("2.4")
-val springBootVersion by extra("3.4.3")
-val springCloudVersion by extra("2024.0.0")
+val springBootVersion by extra("3.4.4")
+val springCloudVersion by extra("2024.0.1")
 
 dependencyManagement {
     imports {
@@ -53,8 +53,8 @@ dependencies {
     val commonsTextVersion = "1.13.1"
     val ecsLoggingVersion = "1.6.0"
     // val jdbcVersion = "11.2.1.jre17"
-    val springBootAdminVersion = "3.4.3"
-    val springdocVersion = "1.8.0"
+    val springBootAdminVersion = "3.4.5"
+    val springdocVersion = "2.8.6"
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
@@ -75,11 +75,12 @@ dependencies {
 
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion")
-    implementation("org.springdoc:springdoc-openapi-webflux-ui:$springdocVersion")
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:$springdocVersion")
 
     implementation("co.elastic.logging:log4j2-ecs-layout:$ecsLoggingVersion")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     // implementation("com.microsoft.sqlserver:mssql-jdbc:$jdbcVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
