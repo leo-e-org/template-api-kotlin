@@ -35,6 +35,6 @@ class WebFilterInterceptor : WebFilter {
     }
 
     protected fun getAllowedEndpoints(): List<String> {
-        return listOf("actuator", "api-docs", "configuration", "v3", "webjars")
+        return listOf("actuator", "api-docs", "configuration", "swagger-ui", "v3", "webjars")
     }
 }

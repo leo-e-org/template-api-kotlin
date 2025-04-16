@@ -18,7 +18,7 @@ Note: all API routes have the context path `/template-api`.
 ```
 GET    | /actuator
 
-GET    | /AppVersion
+GET    | /app-version
 ```
 
 ### Repository file tree

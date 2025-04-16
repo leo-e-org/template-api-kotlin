@@ -18,8 +18,7 @@ management:
       enabled: true
 
 springdoc:
-  swagger-ui:
-    enabled: false
+  packages-to-scan: com.it.template.api
 
 spring:
   application:
