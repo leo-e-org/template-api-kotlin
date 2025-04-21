@@ -51,7 +51,7 @@ dependencies {
     val commonsCollectionsVersion = "4.4"
     val commonsLangVersion = "3.17.0"
     val commonsTextVersion = "1.13.1"
-    val ecsLoggingVersion = "1.6.0"
+    val ecsLoggingVersion = "1.7.0"
     // val jdbcVersion = "11.2.1.jre17"
     val springBootAdminVersion = "3.4.5"
     val springdocVersion = "2.8.6"
