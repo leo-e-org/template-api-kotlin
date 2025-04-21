@@ -5,4 +5,4 @@ spring:
 app:
   api:
     legacy:
-      url: "http://localhost:8080/template-api"
+      url: "http://localhost:8080/template-api-kotlin"

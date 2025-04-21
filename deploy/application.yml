@@ -22,7 +22,7 @@ springdoc:
 
 spring:
   application:
-    name: "template-api"
+    name: "template-api-kotlin"
 
   boot:
     admin:
@@ -30,8 +30,8 @@ spring:
         url: http://localhost/springboot_admin
         instance:
           name: "Template API"
-          health-url: http://localhost/template-api/actuator/health
-          service-url: http://localhost/template-api
+          health-url: http://localhost/template-api-kotlin/actuator/health
+          service-url: http://localhost/template-api-kotlin
 
   cache:
     type: redis
@@ -88,12 +88,12 @@ spring:
       WRITE_DATES_WITH_ZONE_ID: true
 
   webflux:
-    base-path: "/template-api"
+    base-path: "/template-api-kotlin"
 
 app:
   api:
     legacy:
-      url: "http://localhost:8080/template-api"
+      url: "http://localhost:8080/template-api-kotlin"
     request-timeout: 60
 
   config:

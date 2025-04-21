@@ -13,7 +13,7 @@ versioned configuration.
 
 ### Routes
 
-Note: all API routes have the context path `/template-api`.
+Note: all API routes have the context path `/template-api-kotlin`.
 
 ```
 GET    | /actuator
