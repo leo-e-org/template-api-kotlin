@@ -5,5 +5,7 @@ on: [ push ]
 jobs:
   gradle:
     name: Gradle
-    uses: leo-ely/github-workflows/.github/workflows/build-gradle.yml@main
+    uses: leo-e-org/github-workflows/.github/workflows/main-build-k8s-gradle.yml@main
+    with:
+      image_name: ${{ github.repository }}
     secrets: inherit
