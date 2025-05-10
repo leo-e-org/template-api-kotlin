@@ -5,7 +5,7 @@ on: [ pull_request ]
 jobs:
   sources:
     name: Sources
-    uses: leo-ely/github-workflows/.github/workflows/lint-gradle.yml@main
+    uses: leo-e-org/github-workflows/.github/workflows/lint-gradle.yml@main
     permissions:
       contents: read
     with:
@@ -13,7 +13,7 @@ jobs:
     secrets: inherit
   tests:
     name: Tests
-    uses: leo-ely/github-workflows/.github/workflows/lint-gradle.yml@main
+    uses: leo-e-org/github-workflows/.github/workflows/lint-gradle.yml@main
     permissions:
       contents: read
     with:
