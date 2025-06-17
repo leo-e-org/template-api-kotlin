@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.1.20"
-    kotlin("plugin.spring") version "2.1.20"
+    kotlin("jvm") version "2.1.21"
+    kotlin("plugin.spring") version "2.1.21"
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -54,7 +54,7 @@ dependencies {
     val ecsLoggingVersion = "1.7.0"
     // val jdbcVersion = "11.2.1.jre17"
     val springBootAdminVersion = "3.4.5"
-    val springdocVersion = "2.8.8"
+    val springdocVersion = "2.8.9"
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
