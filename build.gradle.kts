@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.2.10"
-    kotlin("plugin.spring") version "2.2.10"
+    kotlin("jvm") version "2.2.21"
+    kotlin("plugin.spring") version "2.2.21"
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
 }
@@ -49,7 +49,7 @@ repositories {
 
 dependencies {
     val commonsCollectionsVersion = "4.5.0"
-    val commonsLangVersion = "3.18.0"
+    val commonsLangVersion = "3.19.0"
     val commonsTextVersion = "1.14.0"
     val ecsLoggingVersion = "1.7.0"
     // val jdbcVersion = "11.2.1.jre17"
