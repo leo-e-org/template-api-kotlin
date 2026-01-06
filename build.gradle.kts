@@ -49,7 +49,7 @@ repositories {
 
 dependencies {
     val commonsCollectionsVersion = "4.5.0"
-    val commonsLangVersion = "3.19.0"
+    val commonsLangVersion = "3.20.0"
     val commonsTextVersion = "1.15.0"
     val ecsLoggingVersion = "1.7.0"
     // val jdbcVersion = "11.2.1.jre17"
